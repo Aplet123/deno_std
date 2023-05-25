@@ -17,9 +17,14 @@
  * ```
  */
 export function union<T>(...arrays: (readonly T[])[]): T[] {
-  const set = new Set<T>();
+  if (arrays.length === 0) {
+    return [];
+  }
 
-  for (const array of arrays) {
+  const [head, ...tail] = arrays;
+  const set = new Set(head);
+
+  for (const array of tail) {
     for (const element of array) {
       set.add(element);
     }
